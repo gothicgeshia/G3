@@ -1,18 +1,20 @@
-// Dies why am i getting a syntax error error on  12, 3? but in world its 11, 3 https://gyazo.com/095f50463fe00144e7962cf7ee3757f7 /// FFS I'm working on a 3 part script here but trying to learn so thisis part 2. 
+// This version we got rid of error and had to add in line 8 however  you have to type in local not the blue drop down box ill have to  find out  how to add that code in and well be a step closer. I'm working on a 3 part script here but trying to learn so thisis part 2. 
 //LSL LSL will allow aperson to  touch an object then gives a  blue drop down box that you can type  a message in and will display float text for 24 hours.
 
 
-default
-{
+default{
     touch_start(integer total_number)
     {
+        llListen(1,"",NULL_KEY,"");
         llDialog(llDetectedKey(0), "Type your message:", ["OK"], 1);
     }
- 
-   dialog(integer channel, string name, list message)
+    
+ // below is how long to  have floating text show in seconds and  color when to stop.
+
+   listen(integer channel, string name, key id, string message)
     {
-        llSetText(llList2String(message, 0), <0.0, 0.0, 1.0>, 1.0);
-        llSetTimerEvent(86400);
+        llSetText(message, <0.0, 0.0, 1.0>, 1.0);
+        llSetTimerEvent(60);
     }
  
     timer()
